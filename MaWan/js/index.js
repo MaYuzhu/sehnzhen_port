@@ -388,7 +388,8 @@ function rltCarState(json){
             }
         })
 	}else{
-        new $Msg({
+        location.href="./login.html";
+        /*new $Msg({
             content:json.head.status.message,
             type:"success",
             cancle:function(){
@@ -397,7 +398,7 @@ function rltCarState(json){
             confirm:function(){
                 location.href="./login.html";
             }
-        })
+        })*/
 		//alert(json.head.status.message);
         //location.href="./login.html";
 	}
