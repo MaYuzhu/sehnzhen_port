@@ -172,7 +172,6 @@ map.addControl(scaleLineControl);
 var source = new ol.source.Vector({
     features: features
 });
-
 //动态生成矢量层
 var vector = new ol.layer.Vector({
     source: source,
@@ -193,7 +192,7 @@ var vector = new ol.layer.Vector({
     })
 });
 map.addLayer(vector);
-// source.clear();
+
 
 //矢量图层鼠标点击事件
 var car_tip_message_flag = true
@@ -399,6 +398,8 @@ function selectVehTrack(){
 	            })]
 	        });
 	        map.addLayer(lineLayer);
+            source1.clear()
+            map.addLayer(vector1)
             //点 测试
             /*var lineSources1
             if (lineSources1){
@@ -427,7 +428,7 @@ function selectVehTrack(){
             });
             map.addLayer(lineLayer1);*/
 
-//2019.1.2ma 轨迹点的 点击事件
+    //2019.1.2ma 轨迹点的 点击事件
            /* var selectClick = new ol.interaction.Select({
                 condition: ol.events.condition.click,
                 style:changeStyle
@@ -458,7 +459,7 @@ function selectVehTrack(){
             }
 */
 
-//2019.1.2end
+    //2019.1.2end
             //根据点的数量确定一个时间长度
             index = 0
             mintime = 0
@@ -609,6 +610,15 @@ var setTimeoutEve;
 var setTimeoutTimeText;
 var angle_start;
 
+var features1 = []
+var source1 = new ol.source.Vector({
+    features: features1
+});
+//动态生成矢量层
+var vector1 = new ol.layer.Vector({  //车辆轨迹的小车
+    source: source1,
+})
+//map.addLayer(vector1)
 var TimeTextChange = function () {
     if (run_carMove) {
         $('.time_real').text(trackData[index].time) //车辆当前位置的时间
@@ -623,7 +633,6 @@ var TimeTextChange = function () {
     }
 
 }
-
 var carMove = function () {
     //$('.time_real').text(trackData[index].time.substring(0,16))
     if (trackData.length < 1) {
@@ -638,7 +647,7 @@ var carMove = function () {
     if (index > 0) {
         car_map_move()
     }
-    index += 1 ;
+    index += 1
 
     if (!trackData[index]) {
     	index = 0;
@@ -655,13 +664,13 @@ var carMove = function () {
                 rotation: angle_start
             })
         })
-        map.removeLayer(carLayer);
+        /*map.removeLayer(carLayer);
         carLayer = new ol.layer.Vector({
             name: "图标",
             source: carSource,
             style: [carStyle]
         });
-        map.addLayer(carLayer)
+        map.addLayer(carLayer)*/
 
         clearTimeout(timer)
         $ball.css('transform','translate(0px,-6px)')
@@ -676,7 +685,6 @@ var carMove = function () {
             'background': 'url("./images/play_but.png") no-repeat left top',
             'margin': '11px 15px'
         })
-
     }
     ball_speed = bar_w / time_slot
     var ball_distance = index / trackData.length * bar_w
@@ -687,7 +695,7 @@ var carMove = function () {
         setTimeoutFlag = true;
     }
 }
-function car_map_move() {
+/*function car_map_move() {
     var ab = "A";
     var a90 = 0;
     var v = getAngle(trackData[index-1].values, trackData[index].values)
@@ -722,14 +730,120 @@ function car_map_move() {
     if(index == 1){ //记录最开始的角度
         angle_start = Math.PI / 180 * Av
     }
-
-    map.removeLayer(carLayer);
+    function insertMapPoint1(features, vdata, fid){
+        var feature = new ol.Feature({
+            geometry: new ol.geom.Point(ol.proj.fromLonLat([Number(vdata.longitude),Number(vdata.latitude)]))
+            //geometry: new ol.geom.Point(ol.proj.fromLonLat([Number(117.78341435166347),Number(38.98634291683676)]))
+        });
+        feature.setId(fid);
+        feature.setStyle(
+            new ol.style.Style({
+                image:new ol.style.Icon({
+                    rotation: Math.PI/180 * Number(30),
+                    color: "white",
+                    src:'/img/icon/1.png'
+                })
+            })
+        )
+        features.push(feature);
+    }
+    source.clear();
+    insertMapPoint1(features, trackData[index].values, null)
+    //console.log(features)
+    console.log(source)
+    //source.addFeatures(features)
+    map.updateSize()
+    /!*map.removeLayer(carLayer);
     carLayer = new ol.layer.Vector({
         name: "图标",
         source: carSource,
         style: [carStyle]
     });
-    map.addLayer(carLayer);
+    map.addLayer(carLayer);*!/
+
+    if (pos)
+        carSource.removeFeature(pos);
+
+    pos = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([trackData[index].values.longitude * 1, trackData[index].values.latitude * 1]))
+    });
+    carSource.addFeature(pos);
+}*/
+var featureA
+function car_map_move() {
+    features1 = []
+    var ab = "A";
+    var a90 = 0;
+    var v = getAngle(trackData[index-1].values, trackData[index].values)
+    if (trackData[index-1].values.longitude > trackData[index].values.longitude) {
+        ab = "A";
+        if (trackData[index-1].values.latitude > trackData[index].values.latitude) {
+            a90 = 90 * 2;
+        } else {
+            ab = "B";
+            a90 = 90 * 3;
+        }
+    } else {
+        ab = "B";
+        if (trackData[index-1].values.latitude > trackData[index].values.latitude) {
+            a90 = 90 * 1;
+        } else {
+            ab = "A";
+            a90 = 0;
+        }
+    }
+    var Av = a90 + v[ab];
+    if (v.A != 0 && v.B != 0) {
+        /*carStyle = new ol.style.Style({
+            image: new ol.style.Icon({
+                color: "white",
+                src: "/img/icon/j1.png",
+                rotation: Math.PI / 180 * Av
+            })
+        });*/
+        featureA = new ol.Feature({
+            geometry: new ol.geom.Point(ol.proj.fromLonLat([Number(trackData[index].values.longitude),Number(trackData[index].values.latitude)]))
+        })
+        featureA.setStyle(
+            new ol.style.Style({
+                image:new ol.style.Icon({
+                    rotation: Math.PI / 180 * Av,
+                    color: "white",
+                    src:'/img/icon/1.png'
+                })
+            })
+        )
+        features1.push(featureA)
+        source1.clear()
+    }
+    if(index == 1){ //记录最开始的角度
+        angle_start = Math.PI / 180 * Av
+    }
+    /*function insertMapPoint1(features, vdata){
+         featureA = new ol.Feature({
+            geometry: new ol.geom.Point(ol.proj.fromLonLat([Number(vdata.longitude),Number(vdata.latitude)]))
+        });
+        featureA.setStyle(
+            new ol.style.Style({
+                image:new ol.style.Icon({
+                    rotation: Math.PI / 180 * Av,
+                    color: "white",
+                    src:'/img/icon/1.png'
+                })
+            })
+        )
+        features.push(featureA);
+    }
+    insertMapPoint1(features1, trackData[index].values)*/
+    source1.addFeatures(features1)
+    map.updateSize()
+    /*map.removeLayer(carLayer);
+    carLayer = new ol.layer.Vector({
+        name: "图标",
+        source: carSource,
+        style: [carStyle]
+    });
+    map.addLayer(carLayer);*/
 
     if (pos)
         carSource.removeFeature(pos);

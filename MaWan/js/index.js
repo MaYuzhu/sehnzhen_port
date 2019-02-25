@@ -3,7 +3,6 @@
 let pageNumber = 1 ; //当前页数
 let pageSize = 8; //每页显示条数
 let pages = 0; //总页数
-
 (function (w) {
     //判断用户是否登录 请求数据接口已经判断过了
     /*const customerId = sessionStorage.customerId
@@ -184,6 +183,7 @@ let pages = 0; //总页数
 	        $('.box_right>div').eq(i).show().siblings().hide();
 	        if(i == 1){
 	            map.removeLayer(vector)
+                $('.time_real').empty()
             }else if(i == 0){
                 map.addLayer(vector)
                 if(run_carMove){
@@ -192,11 +192,13 @@ let pages = 0; //总页数
                         map.removeLayer(carLayer)
                         map.removeLayer(lineLayer)
                         map.removeLayer(lineLayer1)
+                        map.removeLayer(vector1)
                     },300)
                 }else {
                     map.removeLayer(carLayer)
                     map.removeLayer(lineLayer)
                     map.removeLayer(lineLayer1)
+                    map.removeLayer(vector1)
                 }
                 $('.play').css('display','none')
                 $('.play_text').css('display','none')
@@ -340,7 +342,6 @@ let pages = 0; //总页数
 
 
 })(window)
-
 
 $("#state_car").change(function () {
     $('.lst').addClass('page_on').removeClass('page_on_not')
@@ -490,8 +491,10 @@ function realTimeCarData(json){
 	    }
 	    //console.log(curDatas[0].packet_data[0].values.direction)
 		//增加新的坐标点，并更新地图
+        //console.log(features)
 		source.addFeatures(features)
 	    map.updateSize()
+
 		//map.getView().fit(source.getExtent(), map.getSize());
 	}else{
 		//alert(json.head.status.message);
@@ -714,12 +717,14 @@ $(function () {
                 map.removeLayer(carLayer)
                 map.removeLayer(lineLayer)
                 map.removeLayer(lineLayer1)
+                map.removeLayer(vector1)
                 $('.time_real').empty()
             },300)
         }else {
             map.removeLayer(carLayer)
             map.removeLayer(lineLayer)
             map.removeLayer(lineLayer1)
+            map.removeLayer(vector1)
             $('.time_real').empty()
         }
         $('.play').css('display','none')
