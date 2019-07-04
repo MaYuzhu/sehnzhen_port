@@ -1,24 +1,41 @@
 
 var url = 'https://geohey.com/s/dataviz/e42d88bb76df542e86a9d2eea4789071/' +
     '{z}/{x}/{y}.png?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc&retina=@2x';
-//Request URL:https://s5.geohey.com/s/dataviz/0bc0b551c2fc33f431c315df5b537611/16/54208/25052.png?retina=&ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc
-//Request URL:https://s2.geohey.com/s/dataviz/829db1eef85d731f4c179eb632d5dc26/16/54208/25049.png?retina=&ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc
-//Request URL:https://s4.geohey.com/s/dataviz/202f1bdfeebf58c27ded7f355be689fe/11/1693/782.png?retina=&ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc
-//Request URL:https://s4.geohey.com/s/dataviz/0a2518d90fb52073f44ba2c270a3006b/18/216839/100196.png?retina=&ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc
-//Request URL:https://s1.geohey.com/s/dataviz/18e8d56132e3d9fbf1c7ac8505bf4a8b/16/54212/25052.png?retina=&ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc
-//Request URL:https://s8.geohey.com/s/dataviz/cb5212900e319b640c3734aa6667d268/16/54212/25051.png?retina=&ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc
-var url1 = 'https://geohey.com/s/dataviz/8a85b860a16ba677c50b794a02e0b0c0/' +
-    '{z}/{x}/{y}.png?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc&retina=@2x';
-var url2 = 'https://geohey.com/s/dataviz/3267a18b10436d89552a67654339d27d/' +
-    '{z}/{x}/{y}.png?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc&retina=@2x';
-var url3 = 'https://geohey.com/s/dataviz/978c25c7623fa87d9f7f5f9e3a51528f/' +
-    '{z}/{x}/{y}.png?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc&retina=@2x';
-var url4 = 'https://geohey.com/s/dataviz/1303264d3f61e5d8adeb2326ef3fff4d/' +
-    '{z}/{x}/{y}.png?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc&retina=@2x';
-var url5 = 'https://geohey.com/s/dataviz/3c9a4c91c29b6127d84858b05780e0de/' +
-    '{z}/{x}/{y}.png?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc&retina=@2x';
-var url6 = 'https://geohey.com/s/dataviz/f965d4b77beebf2608c4e2c4661138e0/' +
-    '{z}/{x}/{y}.png?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc&retina=@2x';
+
+var url1 = 'https://geohey.com/s/mapviz/079a7a9b3f0d48898b010d561b486072/' +
+    '/mapserver/{z}/{x}/{y}.png?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc';
+var url2 = 'https://geohey.com/s/mapviz/234a8e50c4904c18b2702b91fc0d4f04/' +
+    '/mapserver/{z}/{x}/{y}.png?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc';
+var url3 = 'https://geohey.com/s/mapviz/c56d715e629b4d0689e1b82f102d7980/' +
+    '/mapserver/{z}/{x}/{y}.png?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc';
+var url4 = 'https://geohey.com/s/mapviz/ec7ffd7023dd437f89ab9f576a1eb117/' +
+    '/mapserver/{z}/{x}/{y}.png?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc';
+var url5 = 'https://geohey.com/s/mapviz/9e0ebb57165d49108bd012f7568977a5/' +
+    '/mapserver/{z}/{x}/{y}.png?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc';
+var url6 = 'https://geohey.com/s/mapviz/e7ff6b28e7b7482aa33fb493edbcbe8c/' +
+    '/mapserver/{z}/{x}/{y}.png?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc';
+
+ajax_geo_map('https://geohey.com/s/mapviz/079a7a9b3f0d48898b010d561b486072/mapserver/config?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc','5910e38eb3ba4defb85be957874ab016')
+ajax_geo_map('https://geohey.com/s/mapviz/234a8e50c4904c18b2702b91fc0d4f04/mapserver/config?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc','6e6c3164c2ad44409d80116a39840a86')
+ajax_geo_map('https://geohey.com/s/mapviz/c56d715e629b4d0689e1b82f102d7980/mapserver/config?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc','f6bd3ee41217430ba4d8dadf553227ed')
+ajax_geo_map('https://geohey.com/s/mapviz/ec7ffd7023dd437f89ab9f576a1eb117/mapserver/config?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc','1fa12ba5a3744ffb8de38c7f0c0abef7')
+ajax_geo_map('https://geohey.com/s/mapviz/9e0ebb57165d49108bd012f7568977a5/mapserver/config?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc','bd14a16acdd940358a0ca3f91c5a2ca7')
+ajax_geo_map('https://geohey.com/s/mapviz/e7ff6b28e7b7482aa33fb493edbcbe8c/mapserver/config?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc','5a680c07978c4d37893ad35f95018bbe')
+
+function ajax_geo_map(url,uid) {
+    $.ajax({
+        type:"POST",
+        url:url,
+        async: false,
+        cache: true,
+        dataType: 'json',
+        data:{uid:uid},
+        success: function (json) {
+            //console.log(json)
+        },
+    })
+}
+
 //var pos = [13110795.607205058,4719031.500290665];
 var pos = ol.proj.transform([113.87346268, 22.48496128], 'EPSG:4326', 'EPSG:3857');
 const container = document.getElementById('popup');
@@ -59,8 +76,10 @@ var layers = [
     //谷歌卫星底图
     new ol.layer.Tile({
         source: new ol.source.XYZ({
+            //url:'http://www.google.cn/maps/vt/pb=!1m4!1m3!1i{z}!2i{x}!3i{y}!2m3!1e0!2sm!3i380072576!3m8!2szh-CN!3scn!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0!5m1!1e0'
             url:'http://mt2.google.cn/vt/lyrs=y&hl=zh-CN&gl=CN&src=app&x={x}&y={y}&z={z}&s=G'//谷歌卫星地图 混合
         }),
+        //source:new ol.source.OSM(),
         projection: 'EPSG:3857'
     }),
 
@@ -199,15 +218,27 @@ var car_tip_message_flag = true
 map.on('click', function(e) {
     if(car_tip_message_flag){
         //在点击时获取像素区域
-        $('#popup-content').html('')
+        $('#popup-content').html(`
+            <p><span>车辆：</span><span class="plate_number"></span></p>
+            <p><span>部门：</span><span class="identity_name"></span></p>
+            <p><span>时间：</span><span class="gather_time"></span></p>
+            <!--<p><span>当前速度：</span><span class="velocity"></span></p>-->
+            <!--<p><span>总里程：</span><span class="total_mileage">,</span>&nbsp;&nbsp;<span>当日里程：</span><span class="daily_mileage"></span></p>
+            --><p><span>经纬度：</span><span class="info_xy"></span></p>
+            <p><span>定位状态：</span><span class="quality"></span></p>
+            <p><span>状态：</span><span class="state"></span></p>
+        `)
         var pixel = map.getEventPixel(e.originalEvent);
         var msg ;
         map.forEachFeatureAtPixel(pixel, function(feature) {
             if(feature.getId() == null){
                 return;
             }
-            var data = {'vehicleId': feature.getId()} ;
-            getAjaxRequest("GET", interface_url+"vehicle/get", data, window.car_info, null);
+            var data = {'vehicleId': feature.getId()}
+            var data_xy = {'vehiclesId': feature.getId()}
+            getAjaxRequest("GET", interface_url+"vehicle/get", data, window.car_info, null)
+            getAjaxRequest("GET", interface_url+"location/realtime", data_xy, window.car_info_xy, null)
+
             //coodinate存放了点击时的坐标信息
             var coodinate = e.coordinate;
 
@@ -359,8 +390,14 @@ function selectVehTrack(){
     /*setTimeout(function () {
         $(".play").css({ display: 'block' });
     }, 4000);*/
-	var data = {'vehiclesId':vehicleId, 'startTime':startTime , 'endTime':endTime};
+	var data = {
+	    'vehiclesId':vehicleId,
+        'startTime':startTime ,
+        'endTime':endTime,
+        'precision':6
+    };
 	getAjaxRequest("GET", interface_url+"location/history", data, function(json){
+	    //console.log(json)
 		if(json.head.status.code == 200){
 		    if(json.body[0].data.length < 1){
 		        //alert('当前时间范围内没有数据')

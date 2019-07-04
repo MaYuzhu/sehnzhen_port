@@ -57,21 +57,40 @@ function getAsyncAjaxRequest(type, url, data, async, succFunc, errFunc){
  * @param fid feature编号
  * @returns
  */
-function insertMapPoint(features, vdata, fid){
+function insertMapPoint(features, vdata, fid ){
+
 	var feature = new ol.Feature({
         geometry: new ol.geom.Point(ol.proj.fromLonLat([Number(vdata.longitude),Number(vdata.latitude)]))
         //geometry: new ol.geom.Point(ol.proj.fromLonLat([Number(117.78341435166347),Number(38.98634291683676)]))
     });
-	feature.setId(fid);
-	feature.setStyle(
-		new ol.style.Style({
-	       image:new ol.style.Icon({
-               rotation: Math.PI/180 * Number(vdata.direction),
-	    	   color: "white",
-	    	   src:'/img/icon/1.png'
-	       })
-		})
-	)
+    feature.setId(fid);
+    getAsyncAjaxRequest("GET", interface_url+"vehicle/get", {'vehicleId':fid}, false, getCarPoint, null)
+    function getCarPoint(json, features, vdata, fid) {
+        var carName = json.body.plate_number
+
+        feature.setStyle(
+            new ol.style.Style({
+                image:new ol.style.Icon({
+                    //rotation: Math.PI/180 * Number(vdata.direction),
+                    color: "white",
+                    src:'/img/icon/1yuan.png',
+                    scale:0.15
+                }),
+
+                text: new ol.style.Text({
+                    font: 'Normal ' + 24 + 'px ',
+                    //text: json.body.plate_number,
+                    text: carName,
+                    fill: new ol.style.Fill({ color: '#efff55'}),
+                    stroke: new ol.style.Stroke({color: 'black', width: 3}),
+                    textBaseline: 'bottom',
+                    offsetY:-14
+                })
+            })
+        )
+
+
+    }
     features.push(feature);
 }
 
