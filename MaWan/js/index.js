@@ -476,7 +476,7 @@ function getCurData(){
 var features = [];
 //获取车辆实时-回调函数
 function realTimeCarData(json){
-    console.log(json)
+    //console.log(json)
 	if(json.head.status.code == 200){
 		//移除原来的坐标点
 		if(features.length>0){
@@ -489,6 +489,7 @@ function realTimeCarData(json){
             var vdata = curDatas[i].data[0].values
 
             //var vtime = curDatas[i].data[0].time
+            //console.log(vid)
 			insertMapPoint(features, vdata, vid)
 	    }
 	    //console.log(curDatas[0].packet_data[0].values.direction)

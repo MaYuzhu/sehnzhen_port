@@ -63,19 +63,34 @@ function insertMapPoint(features, vdata, fid ){
         geometry: new ol.geom.Point(ol.proj.fromLonLat([Number(vdata.longitude),Number(vdata.latitude)]))
         //geometry: new ol.geom.Point(ol.proj.fromLonLat([Number(117.78341435166347),Number(38.98634291683676)]))
     });
+    var feature1 = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([Number(vdata.longitude),Number(vdata.latitude)]))
+        //geometry: new ol.geom.Point(ol.proj.fromLonLat([Number(117.78341435166347),Number(38.98634291683676)]))
+    });
+    //console.log(vdata.direction)
     feature.setId(fid);
+    feature.setStyle(
+        new ol.style.Style({
+            image: new ol.style.Icon({
+                rotation: Math.PI/180 * Number(vdata.direction), //vdata.direction
+                color: "white",
+                src: '/img/icon/1.png',
+                //scale:0.15
+            }),
+        })
+    );
+    features.push(feature);
     getAsyncAjaxRequest("GET", interface_url+"vehicle/get", {'vehicleId':fid}, false, getCarPoint, null)
-    function getCarPoint(json, features, vdata, fid) {
+    function getCarPoint(json, features, vdata) {
         var carName = json.body.plate_number
-
-        feature.setStyle(
+        feature1.setStyle(
             new ol.style.Style({
-                image:new ol.style.Icon({
-                    //rotation: Math.PI/180 * Number(vdata.direction),
+                /*image:new ol.style.Icon({
+                    //rotation: Math.PI/180 * Number(vdata.direction), //vdata.direction
                     color: "white",
-                    src:'/img/icon/1yuan.png',
-                    scale:0.15
-                }),
+                    src:'/img/icon/1.png',
+                    //scale:0.15
+                }),*/
 
                 text: new ol.style.Text({
                     font: 'Normal ' + 24 + 'px ',
@@ -89,9 +104,9 @@ function insertMapPoint(features, vdata, fid ){
             })
         )
 
-
+        //features.push(feature);
     }
-    features.push(feature);
+    features.push(feature1);
 }
 
 /**

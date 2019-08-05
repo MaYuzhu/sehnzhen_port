@@ -235,7 +235,7 @@ map.on('click', function(e) {
                 return;
             }
             var data = {'vehicleId': feature.getId()}
-            var data_xy = {'vehiclesId': feature.getId()}
+            var data_xy = {'vehiclesId': feature.getId(),'precision':8}
             getAjaxRequest("GET", interface_url+"vehicle/get", data, window.car_info, null)
             getAjaxRequest("GET", interface_url+"location/realtime", data_xy, window.car_info_xy, null)
 
@@ -320,7 +320,7 @@ function addInteractions() {
                 data: e.feature.getGeometry().getCoordinates()
             }
         }
-        console.log(JSON.stringify(graphical));
+        //console.log(JSON.stringify(graphical));
         $.cookie('coordinate', JSON.stringify(graphical));
     })
 }
