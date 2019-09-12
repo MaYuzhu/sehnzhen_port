@@ -15,6 +15,13 @@ var url5 = 'https://geohey.com/s/mapviz/9e0ebb57165d49108bd012f7568977a5/' +
 var url6 = 'https://geohey.com/s/mapviz/e7ff6b28e7b7482aa33fb493edbcbe8c/' +
     '/mapserver/{z}/{x}/{y}.png?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc';
 
+//19年9月9日 测量服务改一个
+var url_new = 'https://geohey.com/s/mapviz/7c7e4a845b0e4ee0a0fdecf9289430b4/' +
+    '/mapserver/{z}/{x}/{y}.png?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc';
+//7c7e4a845b0e4ee0a0fdecf9289430b4
+var url7 = 'https://geohey.com/s/mapviz/490e8b8b07e14b3c821f6117665b9176/' +
+    '/mapserver/{z}/{x}/{y}.png?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc';
+
 ajax_geo_map('https://geohey.com/s/mapviz/079a7a9b3f0d48898b010d561b486072/mapserver/config?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc','5910e38eb3ba4defb85be957874ab016')
 ajax_geo_map('https://geohey.com/s/mapviz/234a8e50c4904c18b2702b91fc0d4f04/mapserver/config?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc','6e6c3164c2ad44409d80116a39840a86')
 ajax_geo_map('https://geohey.com/s/mapviz/c56d715e629b4d0689e1b82f102d7980/mapserver/config?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc','f6bd3ee41217430ba4d8dadf553227ed')
@@ -22,6 +29,8 @@ ajax_geo_map('https://geohey.com/s/mapviz/ec7ffd7023dd437f89ab9f576a1eb117/mapse
 ajax_geo_map('https://geohey.com/s/mapviz/9e0ebb57165d49108bd012f7568977a5/mapserver/config?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc','bd14a16acdd940358a0ca3f91c5a2ca7')
 ajax_geo_map('https://geohey.com/s/mapviz/e7ff6b28e7b7482aa33fb493edbcbe8c/mapserver/config?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc','5a680c07978c4d37893ad35f95018bbe')
 
+ajax_geo_map('https://geohey.com/s/mapviz/490e8b8b07e14b3c821f6117665b9176/mapserver/' +
+    'config?ak=OGJkMGQwNTVlNzYzNDA0NmIwNDYxZDY4YjQwYmJlYzc','490e8b8b07e14b3c821f6117665b9176')
 function ajax_geo_map(url,uid) {
     $.ajax({
         type:"POST",
@@ -56,7 +65,7 @@ var overlay = new ol.Overlay({
 });
 
 //地图layer配置， 可以多个layer
-var layers = [
+/*var layers = [
     new ol.layer.Image({
         source: new ol.source.ImageWMS({
             ratio: 1,
@@ -69,30 +78,53 @@ var layers = [
             serverType: 'mapserver'
         })
     })
-];
+];*/
+
+var mlayer1 = new ol.layer.Tile({
+    source: new ol.source.XYZ({
+        url:'http://mt2.google.cn/vt/lyrs=y&hl=zh-CN&gl=CN&src=app&x={x}&y={y}&z={z}&s=G'//谷歌卫星地图 混合
+    }),
+    //source:new ol.source.OSM(),
+    projection: 'EPSG:3857'
+})
+var mlayer2 = new ol.layer.Tile({
+    source: new ol.source.XYZ({
+        url: "http://www.google.cn/maps/vt?lyrs=r@189&gl=cn&x={x}&y={y}&z={z}"
+    }),
+    visible: false
+});
+
 
 //ma 18.12.20
 var layers = [
     //谷歌卫星底图
-    new ol.layer.Tile({
+    /*new ol.layer.Tile({
         source: new ol.source.XYZ({
             //url:'http://www.google.cn/maps/vt/pb=!1m4!1m3!1i{z}!2i{x}!3i{y}!2m3!1e0!2sm!3i380072576!3m8!2szh-CN!3scn!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0!5m1!1e0'
             url:'http://mt2.google.cn/vt/lyrs=y&hl=zh-CN&gl=CN&src=app&x={x}&y={y}&z={z}&s=G'//谷歌卫星地图 混合
         }),
         //source:new ol.source.OSM(),
         projection: 'EPSG:3857'
-    }),
-
-    //极海 原
-   new ol.layer.Tile({
+    }),*/
+    mlayer1,
+    mlayer2,
+   //极海
+   /*new ol.layer.Tile({
         source: new ol.source.XYZ({
-            url: url,//添加GeoHey地图
+            url: url_new, //添加GeoHey地图
+            tilePixelRatio: 2, //表示加载高清图显示
+            crossOrigin:null,
+        })
+    }),*/
+
+    //极海
+    new ol.layer.Tile({
+        source: new ol.source.XYZ({
+            url: url7,//添加GeoHey地图
             tilePixelRatio: 2,//表示加载高清图显示
             crossOrigin:null
         })
     }),
-
-    //极海
     new ol.layer.Tile({
         source: new ol.source.XYZ({
             url: url1,//添加GeoHey地图
@@ -136,8 +168,10 @@ var layers = [
             crossOrigin:null
         })
     }),
+
 ];
 //end
+
 
 //实例化 map
 var map = new ol.Map({
@@ -145,15 +179,34 @@ var map = new ol.Map({
     target: 'map',
     view: new ol.View({
         center: pos,
-        zoom: 16
+        zoom: 16,
+        minZoom: 12,
+        maxZoom: 20
     }),
     overlays: [
         overlay
     ],
+
     interactions: new ol.interaction.defaults({
         doubleClickZoom: false,
-    })
+    }),
+    //controls: ol.control.defaults().extend([new ol.control.Compass()]),
 });
+
+function changeMap(data){
+    if(data==1){
+        mlayer1.setVisible(true);
+        mlayer2.setVisible(false);
+        $('.table_map>:nth-child(1)').addClass('active_map')
+        $('.table_map>:nth-child(2)').removeClass('active_map')
+    }else {
+        mlayer1.setVisible(false);
+        mlayer2.setVisible(true);
+        $('.table_map>:nth-child(2)').addClass('active_map')
+        $('.table_map>:nth-child(1)').removeClass('active_map')
+    }
+}
+
 var map_res = new ol.Map({
     layers: layers,
     target: 'map_res',
@@ -187,10 +240,25 @@ var scaleLineControl = new ol.control.ScaleLine({
 });
 map.addControl(scaleLineControl);
 
+
+//旋转地图控件
+var scaleline = new ol.control.Compass();
+map.addControl(scaleline);
+/*map.addControl(new ol.control.Rotate({
+    autoHide: false
+}));*/
+var viewAnimate = map.getView();
+
+viewAnimate.animate({
+    rotation: viewAnimate.getRotation() - Math.PI / 2.5
+});
+
+
 //定义保存动态GIS数据 矢量容器
 var source = new ol.source.Vector({
     features: features
 });
+
 //动态生成矢量层
 var vector = new ol.layer.Vector({
     source: source,
@@ -656,6 +724,7 @@ var vector1 = new ol.layer.Vector({  //车辆轨迹的小车
     source: source1,
 })
 //map.addLayer(vector1)
+
 var TimeTextChange = function () {
     if (run_carMove) {
         $('.time_real').text(trackData[index].time) //车辆当前位置的时间
@@ -806,7 +875,28 @@ var carMove = function () {
     });
     carSource.addFeature(pos);
 }*/
+
+
+//当前地图旋转角度
+//console.log(map.getView().getRotation()-Math.PI/2.5 * 180 / Math.PI)
+var rad_now = map.getView().getRotation()-Math.PI/2.5
+//console.log(rad_now*180/Math.PI)
+
+//var zoom_now = map.getView().getZoom();
+
+/*map.on("moveend",function(e){
+    zoom_now = map.getView().getZoom();  //获取当前地图的缩放级别
+    console.log(zoom_now);
+});*/
+
+
 var featureA
+//获取缩放级别
+var zoom_now = map.getView().getZoom();
+map.on("moveend",function(e){
+    zoom_now = map.getView().getZoom();  //获取当前地图的缩放级别
+    //console.log(zoom_now);
+});
 function car_map_move() {
     features1 = []
     var ab = "A";
@@ -830,6 +920,7 @@ function car_map_move() {
         }
     }
     var Av = a90 + v[ab];
+
     if (v.A != 0 && v.B != 0) {
         /*carStyle = new ol.style.Style({
             image: new ol.style.Icon({
@@ -841,17 +932,28 @@ function car_map_move() {
         featureA = new ol.Feature({
             geometry: new ol.geom.Point(ol.proj.fromLonLat([Number(trackData[index].values.longitude),Number(trackData[index].values.latitude)]))
         })
+        map.on("moveend",function(e){
+            zoom_now = map.getView().getZoom();  //获取当前地图的缩放级别
+            featureA.getStyle().getImage().setScale(0.1 + (8- (20 - zoom_now)) * 0.2375);
+            //console.log(0.1 + (8- (20 - zoom_now)) * 0.2375)
+        });
+        //console.log('out:'+zoom_now);
         featureA.setStyle(
             new ol.style.Style({
                 image:new ol.style.Icon({
-                    rotation: Math.PI / 180 * Av,
+                    rotation: Math.PI / 180 * Av + rad_now,
                     color: "white",
-                    src:'/img/icon/1.png'
+                    //src:'/img/icon/j1.png'
+                    src: './img/icon/chelianghong1.svg',
+                    //imgSize: [20, 50],
+                    scale: 0.1 + (8- (20 - zoom_now)) * 0.2375
+                    //scale:0.85
                 })
             })
         )
         features1.push(featureA)
         source1.clear()
+
     }
     if(index == 1){ //记录最开始的角度
         angle_start = Math.PI / 180 * Av

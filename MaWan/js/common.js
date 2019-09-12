@@ -71,6 +71,7 @@ function insertMapPoint(features, vdata, fid ){
     feature.setId(fid);
     feature.setStyle(
         new ol.style.Style({
+            //暂时不显示车辆
             image: new ol.style.Icon({
                 rotation: Math.PI/180 * Number(vdata.direction), //vdata.direction
                 color: "white",
@@ -85,13 +86,14 @@ function insertMapPoint(features, vdata, fid ){
         var carName = json.body.plate_number
         feature1.setStyle(
             new ol.style.Style({
-                /*image:new ol.style.Icon({
+                image:new ol.style.Icon({
                     //rotation: Math.PI/180 * Number(vdata.direction), //vdata.direction
                     color: "white",
                     src:'/img/icon/1.png',
                     //scale:0.15
-                }),*/
+                }),
 
+                //暂时不显示车辆
                 text: new ol.style.Text({
                     font: 'Normal ' + 24 + 'px ',
                     //text: json.body.plate_number,
